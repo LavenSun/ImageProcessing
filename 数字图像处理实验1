@@ -1,0 +1,49 @@
+图像透视变换原理及实现
+1、原理与公式推导
+2、透视变换的程序实现（调用opencv函数）
+#include <opencv2/core/core.hpp>
+#include <opencv2/imgproc/imgproc.hpp>
+#include <opencv2/highgui/highgui.hpp>
+#include <iostream>
+#include<stdio.h>
+using namespace std;
+using namespace cv;
+void TouShenBianHuan1()
+{
+    Mat src = imread("//home//#include <opencv2/core/core.hpp>
+#include <opencv2/imgproc/imgproc.hpp>
+#include <opencv2/highgui/highgui.hpp>
+#include <iostream>
+#include<stdio.h>
+using namespace std;
+using namespace cv;laven//CodePractice//0925_2.jpg");
+    imshow("test1", src);
+	int img_height = src.rows;
+	int img_width = src.cols;
+	vector<Point2f>src_corners(4);
+	src_corners[0] = Point2f(27.5, 25);
+	src_corners[1] = Point2f(1892, 217);
+	src_corners[2] = Point2f(13.5, 1369);
+	src_corners[3] = Point2f(1858, 900);
+	circle(src, src_corners[0], 3, Scalar(0, 0, 255), 3, 8);
+	circle(src, src_corners[1], 3, Scalar(0, 0, 255), 3, 8);
+	circle(src, src_corners[2], 3, Scalar(0, 0, 255), 3, 8);
+	circle(src, src_corners[3], 3, Scalar(0, 0, 255), 3, 8);
+	vector<Point2f>dst_coners(4);
+    dst_coners[0] = Point2f(0, 500);
+	dst_coners[1] = Point2f(900, 500);
+	dst_coners[2] = Point2f(0, 1000);
+	dst_coners[3] = Point2f(900, 1000);
+	Mat warpMatrix = getPerspectiveTransform(src_corners, dst_coners);
+	Mat dst;
+	warpPerspective(src, dst, warpMatrix, dst.size(), INTER_LINEAR, BORDER_CONSTANT);
+	imshow("test2", dst);
+	waitKey();
+}
+int main()
+{
+    TouShenBianHuan1();
+    return 0;
+}
+
+3、自己编写程序实现透视变换
